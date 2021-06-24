@@ -12,19 +12,20 @@ import Instructions from "./Instructions";
 */
 function Content(props) {
 
+  const [toggle,setToggle]=useState(false)
 
-  const [toggleEditor, setEditor] =useState(false)
-  function showEditor(e){
-      
-    console.log(toggleEditor=>!toggleEditor)
-  
+  //triggers the toggle to true so then it can open editor
+  function handleEditButton(e){
+    e.preventDefault()
+   setToggle((e.target.value)=!toggle)
   }
+  
 
   const getContent = () => {
-    if (false) {
-      return <NoteEditor/>;
+    if (toggle) {
+      return <NoteEditor displayNote={props.displayNote}/>;
     } else if (props.displayNote) {
-      return <NoteViewer displayNote={props.displayNote} showEditor={showEditor}/>;
+      return <NoteViewer displayNote={props.displayNote} handleEditButton={handleEditButton}/>;
     } else {
       return <Instructions />;
     }
