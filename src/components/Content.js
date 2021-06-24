@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import NoteEditor from "./NoteEditor";
 import NoteViewer from "./NoteViewer";
 import Instructions from "./Instructions";
@@ -10,12 +10,21 @@ import Instructions from "./Instructions";
           Then complete the rest of your app before attempting to
           refactor to get this Content component to work.
 */
-function Content() {
+function Content(props) {
+
+
+  const [toggleEditor, setEditor] =useState(false)
+  function showEditor(e){
+      
+    console.log(toggleEditor=>!toggleEditor)
+  
+  }
+
   const getContent = () => {
     if (false) {
-      return <NoteEditor />;
-    } else if (false) {
-      return <NoteViewer />;
+      return <NoteEditor/>;
+    } else if (props.displayNote) {
+      return <NoteViewer displayNote={props.displayNote} showEditor={showEditor}/>;
     } else {
       return <Instructions />;
     }

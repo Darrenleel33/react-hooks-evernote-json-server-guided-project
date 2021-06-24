@@ -1,10 +1,15 @@
 import React from "react";
 
-function NoteItem() {
+function NoteItem(props) {
+
+ function handleClick(){
+  props.handleDisplay(props.note.id)
+ }
+
   return (
-    <li>
-      <h2>Title</h2>
-      <p>Caption...</p>
+    <li onClick={handleClick}>
+      <h2>{props.note.title}</h2>
+      <p className="noteitemBody" >{props.note.body}</p>
     </li>
   );
 }

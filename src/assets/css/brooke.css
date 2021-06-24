@@ -158,6 +158,17 @@ div.sidebar ul li:hover {
 }
 
 
+p.noteitemBody{
+  word-break: break-word;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  line-height: 16px; /* fallback */
+  max-height: 32px; /* fallback */
+  -webkit-line-clamp: 2; /* number of lines to show */
+  -webkit-box-orient: vertical;
+}
+
 /* Button Style */
 input[type="submit"] {
   height: auto;
@@ -185,3 +196,5 @@ button:hover, .nav-bar:hover, input[type="submit"]:hover {
 button:focus, input[type="submit"]:focus {
   outline: none;
 }
+
+/* Side scroll bar */
