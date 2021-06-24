@@ -10,11 +10,18 @@ import Content from "./Content";
 
 
 function NoteContainer() {
-
+  
   const [notes, setNotes]= useState([])
   const [searchTerm, setSearch]=useState("")
   const [displayNote, setDisplay]=useState(null)
   
+  useEffect(()=>{
+   fetch("http://localhost:3000/notes")
+   .then (res=>res.json())
+   .then(data=>setNotes(data))}
+   ,[]
+   )
+
   function handleSearchChange(e){
     e.preventDefault();
     setSearch(e.target.value)
@@ -35,22 +42,31 @@ function handleDisplay(id){
  console.log(findNote)
 }
  
-  useEffect(()=>{
-   fetch("http://localhost:3000/notes")
-   .then (res=>res.json())
-   .then(data=>setNotes(data))}
-   ,[]
-   )
+function newPostArray(newPost){
+ let newArray=[newPost, ...notes]
+ setNotes(newArray)
+}
 
+function newEditPost(newEdit){
+  let editArray= notes.map(note=>{
+    if (note.id === newEdit.id){
+      return newEdit
+    }else{
+      return note
+    }
+  })
+  setNotes(editArray)
+}
+
+    
   
-
   return (
     <>
       <Search searchTerm={searchTerm} handleSearchChange={handleSearchChange}/>
       <div className="container">
-        <Sidebar notes={filteredNotes()} handleDisplay={handleDisplay}/>
+        <Sidebar notes={filteredNotes()} newPostArray={newPostArray} handleDisplay={handleDisplay}/>
         {/* pass something in content */}
-        <Content displayNote={displayNote}/> 
+        <Content displayNote={displayNote} newEditPost={newEditPost}/> 
       </div>
     </>
   );

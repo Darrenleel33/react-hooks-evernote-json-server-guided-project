@@ -13,17 +13,21 @@ import Instructions from "./Instructions";
 function Content(props) {
 
   const [toggle,setToggle]=useState(false)
-
+  
   //triggers the toggle to true so then it can open editor
   function handleEditButton(e){
     e.preventDefault()
    setToggle((e.target.value)=!toggle)
   }
   
+  function cancelButton(e){
+    e.preventDefault()
+    setToggle((e.target.value)=!toggle)
+  }
 
   const getContent = () => {
     if (toggle) {
-      return <NoteEditor displayNote={props.displayNote}/>;
+      return <NoteEditor displayNote={props.displayNote} cancelButton={cancelButton} newEditPost={props.newEditPost}/>;
     } else if (props.displayNote) {
       return <NoteViewer displayNote={props.displayNote} handleEditButton={handleEditButton}/>;
     } else {

@@ -4,7 +4,7 @@ import NoteList from "./NoteList";
 
 function Sidebar(props) {
  
-//  const [newPost,setNewPost]=useState("") 
+
  
  function makeNewPost(){
   
@@ -19,10 +19,10 @@ function Sidebar(props) {
       title: "Default Title",
       body:"Test Body"
     })
-  });
-  
-  // to refresh the new Post
-  window.location.reload();
+  })
+  .then(res=>res.json())
+  .then(newPost=>props.newPostArray(newPost))
+
 
  }
   return (
